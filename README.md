@@ -16,7 +16,7 @@ This course starts off very simple so many things I already know but I still wan
 review. 
 
 ## Link to course
-[[https://www.udemy.com/home/my-courses/learning/][Link to all Udemy Courses]]
+[Link to all Udemy Courses](https://www.udemy.com/home/my-courses/learning/)
 
 
 
