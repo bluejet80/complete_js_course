@@ -8,7 +8,7 @@ const passTest = true;
 if (passTest) hasDriversLicense = true;
 if (hasDriversLicense) console.log(`I can drive!`)
 */
-
+/*
 function logger() {
     console.log('My name is Jarett');
 }
@@ -30,7 +30,7 @@ function calcAge1(birthYear) {
 
 const age1 = calcAge1(1980);
 console.log(age1);
-
+*/
 
 // Function Expression
 const calcAge2 = function (birthYear) {
@@ -39,3 +39,8 @@ const calcAge2 = function (birthYear) {
 
 const age2 = calcAge2(1991)
 console.log(age2);
+
+const calcAge3 = birthYear => 2037 - birthYear
+
+const age3 = calcAge3(1930);
+console.log(age3);
