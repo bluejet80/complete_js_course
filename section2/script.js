@@ -31,7 +31,7 @@ function calcAge1(birthYear) {
 const age1 = calcAge1(1980);
 console.log(age1);
 */
-
+/*
 // Function Expression
 const calcAge2 = function (birthYear) {
     return 2037 - birthYear;
@@ -55,3 +55,220 @@ const yearUntilRetirement = (birthYear, firstName) => {
 
 console.log(yearUntilRetirement(1991, 'Jimmy'));
 
+
+// functions calling functions
+
+function cutFruitPieces(fruit) {
+    return fruit * 4
+}
+
+
+function fruitProcessor(apples, oranges) {
+    const applePieces = cutFruitPieces(apples);
+    const orangePieces = cutFruitPieces(oranges);
+
+    const juice = `Juice made with ${applePieces} pieces of apple and ${orangePieces} pieces of orange.`;
+    return juice;
+}
+console.log(fruitProcessor(2, 3));
+
+// coding challenge
+
+
+const calcAverage = (a, b, c) => (a + b + c) / 3;
+
+const dolphinAverage = calcAverage(80, 100, 125);
+const koalasAverage = calcAverage(20, 54, 49);
+
+const checkWinner = (avgDolphin, avgKoalas) => {
+    if (avgDolphin >= avgKoalas * 2) {
+        console.log(`Dolphins win (${avgDolphin} vs. ${avgKoalas})`)
+    } else if (avgKoalas >= avgDolphin * 2) {
+        console.log(`Koalas win (${avgKoalas} vs. ${avgDolphin})`);
+    } else { console.log(`There are no winners.`) }
+}
+checkWinner(dolphinAverage, koalasAverage);
+
+*/
+/*
+const friends = ['Michael', 'Steven', 'Peter'];
+console.log(friends);
+
+const years = new Array(1991, 1984, 2008, 2020);
+console.log(years);
+
+console.log(friends[0]);
+
+console.log(friends.length);
+console.log(friends[friends.length - 1]);
+
+friends[2] = 'Jade'
+console.log(friends);
+
+const jarett = ['Jarett', 'Young', 2021 - 1980, 'programmer', friends];
+
+console.log(jarett);
+
+// Exercise
+
+const calcAge3 = birthYear => 2037 - birthYear
+
+const year2 = [1990, 1967, 2002, 2010, 2018]
+
+const age1 = calcAge3(year2[0]);
+const age2 = calcAge3(year2[1]);
+const age3 = calcAge3(year2[year2.length - 1]);
+
+console.log(age1, age2, age3);
+
+const ages = [calcAge3(year2[0]), calcAge3(year2[1]), calcAge3(year2[year2.length - 1])];
+
+console.log(ages);
+*/
+
+// Array Methods
+/*
+const friends = ['Michael', 'Steven', 'Peter'];
+friends.push('Jade');
+// push method returns the length of the new array.
+
+function print(item) { console.log(item) };
+
+print(friends);
+
+friends.unshift('John');
+print(friends);
+
+friends.pop();
+print(friends);
+// the pop method returns the value of the removed item
+
+friends.shift();
+print(friends);
+// the shift method returns the element that was removed
+
+print(friends.indexOf("Steven"))
+
+print(friends.includes('Peter'));
+
+*/
+/*
+// Objects
+
+const jarett = {
+    firstName: 'Jarett',
+    lastName: 'Young',
+    age: 2022 - 1980,
+    job: 'Programmer',
+    friends: ['Tim', 'Brent', 'Andy']
+}
+
+console.log(jarett.firstName);
+console.log(jarett.age);
+console.log(jarett['age']);
+// the bracket notation allows you to write any
+// expression inside the brackets
+
+const nameKey = 'Name';
+console.log(jarett['first' + nameKey]);
+
+// const interestedIn = prompt('What do you want to know about Jarett? Choose between')
+
+
+// if (jarett[interestedIn]) {
+//     console.log(jarett[interestedIn]);
+// } else {
+//     alert("Wrong request!")
+// }
+
+// adding things to the object
+
+jarett.location = 'Wichita';
+jarett['car'] = 'Honda CRV';
+
+console.log(jarett);
+
+//example
+console.log(`${jarett.firstName} has ${jarett.friends.length} friends and his best friend is ${jarett.friends[2]}.`);
+
+*/
+// Object Methods
+
+const jarett = {
+    firstName: 'Jarett',
+    lastName: 'Young',
+    birthYear: 1980,
+    job: 'Programmer',
+    friends: ['Tim', 'Brent', 'Andy'],
+    hasDriversLicense: true,
+
+    // calcAge: function (birthYear) {
+    //     return 2037 - birthYear;
+    // }
+
+    // calcAge: function () {
+    //     // console.log(this);
+    //     return 2037 - this.birthYear;
+    // }
+
+    calcAge: function () {
+        this.age = 2022 - this.birthYear
+        return this.age;
+    },
+
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()}-year old ${this.job}, and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's license.`
+    }
+
+}
+
+console.log(jarett.calcAge());
+
+// console.log(jarett['calcAge']());
+
+console.log(jarett.age);
+console.log(jarett.age);
+console.log(jarett.age);
+
+//challenge
+// "Jonas is a 46-year old teacher, and he has a driver's license."
+
+console.log(jarett.getSummary());
+
+// coding challenge #3
+
+const mark = {
+    fullName: 'Mark Miller',
+    mass: 78,
+    height: 1.69,
+    calcBMI: function () {
+        this.BMI = this.mass / this.height ** 2
+        return this.BMI
+    },
+    getSummary: function () {
+        return `${this.fullName} has a BMI of ${this.calcBMI()}`
+    }
+
+}
+
+const john = {
+    fullName: 'John Smith',
+    mass: 92,
+    height: 1.95,
+    calcBMI: function () {
+        this.BMI = this.mass / this.height ** 2
+        return this.BMI
+    },
+    getSummary: function () {
+        return `${this.fullName} has a BMI of ${this.calcBMI()}`
+    }
+}
+
+console.log(mark.getSummary());
+console.log(john.getSummary());
+
+if (john.BMI > mark.BMI) {
+    console.log(`${john.fullName}'s BMI ${john.BMI} is higher than ${mark.fullName}'s ${mark.BMI}!`)
+} else {
+    console.log(`${mark.fullName}'s BMI ${mark.BMI} is higher than ${john.fullName}'s ${john.BMI}!`)
+}
