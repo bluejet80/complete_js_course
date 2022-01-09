@@ -193,7 +193,7 @@ console.log(`${jarett.firstName} has ${jarett.friends.length} friends and his be
 
 */
 // Object Methods
-
+/*
 const jarett = {
     firstName: 'Jarett',
     lastName: 'Young',
@@ -272,3 +272,135 @@ if (john.BMI > mark.BMI) {
 } else {
     console.log(`${mark.fullName}'s BMI ${mark.BMI} is higher than ${john.fullName}'s ${john.BMI}!`)
 }
+
+// loops
+
+for (let rep = 2; rep <= 10; rep = rep + 2) {
+    let weightSize = 10 + rep;
+    console.log(`Lifiting ${weightSize} weights repetition ${rep}.`)
+}
+
+// looping arrays
+
+const ceramics = [
+    'clay',
+    'throw',
+    'carve',
+    20,
+    ['bisque file', 'glaze fire'],
+    true
+];
+
+const types = [];
+
+// for (let i = 0; i < ceramics.length; i++) {
+//     // reading from array
+//     console.log(ceramics[i], typeof ceramics[i]);
+//     // filling types array
+//     types[i] = typeof ceramics[i];
+//     // another way to fill
+//     //types.push(typeof ceramics[i]);
+// }
+
+console.log(types);
+
+// second exercise
+
+const birthYears = [1991, 2007, 1969, 2020]
+const ages = [];
+
+for (let i = 0; i < birthYears.length; i++) {
+    ages[i] = 2037 - birthYears[i];
+}
+
+console.log(ages);
+
+// continue and break
+// only print items of type string with continue
+console.log(`-----Only strings---------`)
+for (let i = 0; i < ceramics.length; i++) {
+    if (typeof ceramics[i] !== 'string') continue;
+    console.log(ceramics[i], typeof ceramics[i]);
+
+}
+
+// after a number is found break the loop with break
+console.log(`-----Break w number---------`)
+for (let i = 0; i < ceramics.length; i++) {
+    if (typeof ceramics[i] === 'number') break;
+    console.log(ceramics[i], typeof ceramics[i]);
+
+}
+
+*/
+
+/*
+// looping backwards
+const faces = [
+    'happy',
+    'sad',
+    15,
+    'excited',
+    ['eyes', 'mouth'],
+    true
+];
+
+for (let i = faces.length - 1; i >= 0; i--) {
+    console.log(faces[i]);
+}
+
+// creating a loop inside a loop
+
+for (let exercise = 1; exercise < 4; exercise++) {
+    console.log(`----Starting exercise ${exercise}`)
+    for (let rep = 1; rep < 6; rep++) {
+        console.log(`Exercise ${exercise}: Lifting weights repetition ${rep}.`)
+    }
+}
+*/
+// while loops
+// let rep = 1
+// while (rep < 11) {
+//     console.log(`Lifting weights repetition ${rep}.`)
+//     rep++
+// }
+
+// another example
+let dice = Math.trunc(Math.random() * 6) + 1
+
+while (dice !== 6) {
+    console.log(`You rolled a ${dice}`)
+    dice = Math.trunc(Math.random() * 6) + 1
+    if (dice === 6) console.log(`Loop is about to end...`)
+}
+
+
+// final coding challenge
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+const tips = [];
+const totals = [];
+
+for (let i = 0; i < bills.length; i++) {
+    tips[i] = bills[i] * .20;
+    totals[i] = tips[i] + bills[i];
+    console.log(`The bill was $${bills[i]}, the tip was $${tips[i]}, the total bill was $${totals[i]}.`)
+}
+
+const calcAverage = function (list) {
+    let sum = 0;
+    for (let i = 0; i < list.length; i++) {
+        sum += list[i];
+    }
+    return sum / list.length;
+}
+
+const billsAvg = calcAverage(bills);
+console.log(`The average of the bills was ${billsAvg}.`);
+
+const tipsAvg = calcAverage(tips);
+console.log(`The average of the tips was ${tipsAvg}.`);
+
+const totalsAvg = calcAverage(totals);
+console.log(`The average of the totals was ${totalsAvg}.`);
