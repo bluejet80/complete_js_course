@@ -59,7 +59,7 @@ p {
   display: none;
 }
 
-.modal {
+#page1, #page2, #page3{
   position: absolute;
   top: 50%;
   left: 50%;
