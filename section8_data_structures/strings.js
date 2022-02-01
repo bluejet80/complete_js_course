@@ -81,7 +81,7 @@ console.log(
   reverseSentence('selppa emos thguob dna yadot erots eht ot tnew I')
 );
 
-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;
+console.log(reverseSentence('Every line of the story is cool'));
 
 //console.log('I am Happy'.split(' '));
 
