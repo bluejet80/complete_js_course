@@ -1,53 +1,124 @@
 'use strict';
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-  printGoals: function (...player) {
-    let total = 0;
-    for (let i = 0; i < player.length; i++) {
-      console.log(player[i]);
-      total++;
-    }
-    console.log(`Total goals scored ${total}.`);
-  },
-};
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+document.querySelector('button').textContent = 'Click me';
+
+// document.querySelector('button').addEventListener('click', function () {
+//   const text = document.querySelector('textarea').value;
+//   const rows = text.split('\n');
+//   let num = 1;
+
+//   for (const item of rows) {
+//     const upper = [];
+//     const lower = item.toLowerCase(); // what_ever
+//     const word = lower.split('_');
+//     upper.push(word[0].trimStart());
+//     upper.push(word[1].replace(word[1][0], word[1][0].toUpperCase()));
+//     console.log(upper.join('').padEnd(18, ' ') + '✅'.repeat(num));
+//     num++;
+//   }
+// });
+
+// better way
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (const [i, item] of rows.entries()) {
+    // get the index through destructuring
+    const [first, second] = item.toLowerCase().trim().split('_');
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(output.padEnd(20) + '✅'.repeat(i + 1));
+  }
+});
+
+//
+
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+//   printGoals: function (...player) {
+//     let total = 0;
+//     for (let i = 0; i < player.length; i++) {
+//       console.log(player[i]);
+//       total++;
+//     }
+//     console.log(`Total goals scored ${total}.`);
+//   },
+// };
 
 ///////////////////////////////////////
 // Coding Challenge #3
@@ -64,49 +135,49 @@ Let's continue with our football betting app! This time, we have a map with a lo
 GOOD LUCK 😀
 */
 
-const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
 
-// 1) create array of game events
+// // 1) create array of game events
 
-const events = [...new Set(gameEvents.values())];
-console.log(events);
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
 
-// 2) remove yellow card
-gameEvents.delete(64);
-console.log(gameEvents);
+// // 2) remove yellow card
+// gameEvents.delete(64);
+// console.log(gameEvents);
 
-// 3) Print String
+// // 3) Print String
 
-console.log(
-  `An event happened, on average, every ${90 / gameEvents.size} minutes.`
-);
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes.`
+// );
 
-// 4) print event to console
+// // 4) print event to console
 
-for (const [key, value] of gameEvents) {
-  if (key < 45) {
-    console.log(`[First Half] ${key}: ${value}`);
-  } else console.log(`[Second Half] ${key}: ${value}`);
-}
+// for (const [key, value] of gameEvents) {
+//   if (key < 45) {
+//     console.log(`[First Half] ${key}: ${value}`);
+//   } else console.log(`[Second Half] ${key}: ${value}`);
+// }
 
-// another more consise way
+// // another more consise way
 
-for (const [min, event] of gameEvents) {
-  const half = min <= 45 ? 'FIRST' : 'SECOND';
-  console.log(`[${half} Half] ${min}: ${event}`);
-}
+// for (const [min, event] of gameEvents) {
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} Half] ${min}: ${event}`);
+// }
 
 ///////////////////////////////////////
 // Coding Challenge #2
