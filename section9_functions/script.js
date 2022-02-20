@@ -2,6 +2,26 @@
 
 /// having Funcitons return other functions
 
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet('whats up?');
+greeterHey('jarett');
+greeterHey('frank');
+
+// or we could do it all in one line
+greet('You over there')('Bob');
+
+//same thing but with an arrow functions
+
+const newGreet = greeting => name => console.log(`${greeting} ${name}`);
+
+newGreet('Whats your name')('Jerry');
+newGreet('Throw all the apples to')('Mark');
+
 // higher order functions, those functions that takes functions as arguments
 
 const oneWord = function (str) {
