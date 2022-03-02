@@ -1,5 +1,99 @@
 'use strict';
 
+//------------------------
+// Closures
+const secureBooking = function () {
+  // function that returns a function
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
+// Eventhough the original funciton has finished and has been removed from the call stack
+// the booker funciton is still able to access and increment the variable passengerCount.
+// This is possible because of the Closure.
+
+// More closure examples
+//Example 1
+// we dont need to return a function from a function to create a closure
+let f; // first declaration of f in the lobal scope
+const g = function () {
+  const a = 23;
+  f = function () {
+    // f is assigned to a function
+    console.log(a * 2);
+  };
+};
+
+// take it a step further
+const h = function () {
+  const b = 777;
+  f = function () {
+    // f is assigned to another function
+    console.log(b * 2);
+  };
+};
+
+g(); // assigns f to a function
+f(); // accesses the variables of g()
+console.dir(f); // looking inside the closure
+
+h(); // assigns f to another function
+f(); // f is now different
+console.dir(f);
+
+//Example 2
+//Timer
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    // timer
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers.`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds.`);
+};
+
+const perGroup = 1000; // this variable is not used because
+// the closure has priority over the scope chain
+
+boardPassengers(180, 3);
+
+// eventhough the callback function was executed afer the main function had ended
+// 3 seconds later
+// it still had access to all the variables of the original function
+
+// //-------------------------------
+// // Immediately Invoked Function Expressions(IIFE)
+// //Regular Function expression
+// const runOnce = function () {
+//   console.log('This will only run once.');
+// };
+// runOnce();
+
+// // (IIFE) Function Expression
+// (function () {
+//   console.log('this REALLY will only be run once!');
+// })();
+
+// // wrap the function in Paranthesis and then use () at the end to call the function.
+
+// // Now with an arrow function
+// (() => console.log('this will only run once.'))();
+
+// The main reason for doing this is for data encapsulation, and data privacy
+// in modern JS however it is not necessary to create a function in order to
+// encapsulate a variable, you just put it inside a code block.
+
+//-----------------------------------------------------
 // the call and apply methods
 // how we can set the this keyword manually and why wed want to
 
@@ -15,9 +109,9 @@ const delta = {
   }, // when we type just name, it makes the key name and the value that of the name parameter
 };
 
-delta.book(372, 'Jarett Young');
-delta.book(993, 'Jimmy Sousa');
-console.log(delta.bookings);
+//delta.book(372, 'Jarett Young');
+//delta.book(993, 'Jimmy Sousa');
+//console.log(delta.bookings);
 
 const book = delta.book; // using a method in another object
 
@@ -28,26 +122,26 @@ const eurowings = {
   book, // this is just one way of doing it
 };
 
-eurowings.book(431, 'Randy Waters');
+//eurowings.book(431, 'Randy Waters');
 
 // same thing using the CALL method
 // manually setting the this keyword
 
-book.call(eurowings, 54, 'Tiffany Bell');
-console.log(eurowings.bookings);
+//book.call(eurowings, 54, 'Tiffany Bell');
+//console.log(eurowings.bookings);
 
-book.call(delta, 72, 'Tiffany Bell');
-console.log(delta.bookings);
+//book.call(delta, 72, 'Tiffany Bell');
+//console.log(delta.bookings);
 
 // Same thing using the APPLY Method
 // it takes an array as one of its arguments
 const flightData = [126, 'Kyle Younger'];
-book.apply(delta, flightData);
-console.log(delta.bookings);
+//book.apply(delta, flightData);
+//console.log(delta.bookings);
 
 // Call method with array as argument using the spread operator
 
-book.call(eurowings, ...flightData);
+//book.call(eurowings, ...flightData);
 
 // Using the Bind Method to manually assign the this keyword
 // Bind doees not immediately call the function, instead it returns a function where
@@ -55,7 +149,7 @@ book.call(eurowings, ...flightData);
 
 const bookEW = book.bind(eurowings);
 
-bookEW(77, 'William Slater');
+//bookEW(77, 'William Slater');
 
 // /// having Funcitons return other functions
 
@@ -83,14 +177,14 @@ bookEW(77, 'William Slater');
 
 // const oneWord = function (str) {
 //   //callback function
-//   return str.replace(/ /g, '').toLowerCase();
+//   return str.replace(/ /g, '').toLowerCase(); //removes spaces and makes all lowercase
 // };
 
-// const upperFirstWord = function (str) {
-//   //callback function
-//   const [first, ...others] = str.split(' ');
-//   return [first.toUpperCase(), ...others].join(' ');
-// };
+const upperFirstWord = function (str) {
+  //callback function, good use of spread
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
 
 // const transformer = function (str, fn) {
 //   // higher order function takes a callback function as a parameter
