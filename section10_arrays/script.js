@@ -71,6 +71,85 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+//New Array Methods
+
+let arr = ['a','b','c','d','e']
+
+// the slice method
+
+//console.log(arr.slice(2))
+//console.log(arr.slice(2,4))
+//console.log(arr.slice(-1))
+//console.log(arr.slice())
+
+// The splice method
+// unlike the slice method this does change the original array
+
+//console.log(arr.splice(2));
+//console.log(arr)
+
+// Reverse Method
+// The reverse method does mutate the array as well
+
+arr = ['a','b','c','d','e']
+const arr2 = ['j','i','h','g','f'];
+//console.log(arr2.reverse())
+//console.log(arr2)
+
+// Concat Method
+
+const letters = arr.concat(arr2)
+//console.log(letters);
+//console.log([...arr,...arr2]); // does the same as the concat method
+
+// Join
+
+//console.log(letters.join(' - '));
+
+
+// The New 'AT' Method
+//
+const arr3 = [23, 11, 64];
+//console.log(arr3[0]) // old way to get value
+//console.log(arr3.at(0)) // new way of getting value
+//the best thing about the at method is you can chain it to other things
+
+// getting the last value of the array
+//console.log(arr3[arr3.length -1]);
+//console.log(arr3.slice(-1)[0])
+//console.log(arr3.at(-1))
+
+//the at method also works on strings
+//console.log('jarett'.at(4))
+
+
+// The FOREACH Method
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+
+for (const item of movements) {
+	if(item > 0) {
+		console.log(`You deposited ${item}`);
+	}else {
+		console.log(`You withdrew ${Math.abs(item)}`);
+	}
+}
+
+console.log('---------- ForEach ----------')
+// Now we will use the forEach method
+
+movements.forEach(function(item) {
+	if(item > 0) {
+		console.log(`You deposited ${item}`);
+	}else {
+		console.log(`You withdrew ${Math.abs(item)}`);
+	}
+			
+})
+
+
+
