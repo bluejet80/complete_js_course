@@ -62,14 +62,15 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 // Diplaying the transactions
+// Diplaying the transactions
 const displayMovements = function(movements) {
-	containerMovements.innerHTML = '';
-	movements.forEach(function(mov, i){
-	const type = mov > 0 ? 'deposit' : 'withdrawal'
+containerMovements.innerHTML = '';
+movements.forEach(function(mov, i){
+const type = mov > 0 ? 'deposit' : 'withdrawal'
         const html = `
-	<div class="movements__row">
+<div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} - ${type}</div>
-          <div class="movements__value">${mov}</div>
+          <div class="movements__value">${mov}€</div>
         </div>`;
 	containerMovements.insertAdjacentHTML('afterbegin',html);
 	})
@@ -77,24 +78,87 @@ const displayMovements = function(movements) {
 displayMovements(account1.movements)
 
 // Displaying the balance
+// Displaying the balance
 const calcDisplayBalance = function(movements) {
      const balance = movements.reduce((acc,mov) => acc + mov,0);
-	labelBalance.textContent = `${balance} EUR`;
+	labelBalance.textContent = `${balance}€`;
 }
 calcDisplayBalance(account1.movements)
 
+
+// Diplaying the Summary
+// Diplaying the Summary
+const calcDisplaySummary = function(movements) {
+    const incomes = movements
+        .filter(mov => mov > 0)
+        .reduce((acc, mov) => acc + mov,0)
+    labelSumIn.textContent = `${incomes}€`
+
+    const out = movements
+        .filter(mov => mov < 0)
+        .reduce((acc, mov) => acc + mov,0)
+    labelSumOut.textContent = `${Math.abs(out)}€`
+
+    const interest = movements
+        .filter(mov => mov > 0)
+        .map(dep => dep * 1.2/100)
+        .filter(a => a >= 1)
+        .reduce((acc, mov) => acc + mov,0)
+    labelSumInterest.textContent = `${interest}€`
+    }
+
+
+calcDisplaySummary(account1.movements)
+
+
+
+/// Creating usernames from the user objects
 /// Creating usernames from the user objects
 const createUsernames = function (accs) { // accepts an array of accounts
-	accs.forEach(function (acc) { // for each account of the array
+accs.forEach(function (acc) { // for each account of the array
 	   acc.username = acc.owner // create a new property in the object
-		.toLowerCase()     // assign it to the coverted string.
+        .toLowerCase()     // assign it to the coverted string.
 		.split(' ')
-		.map(name => name[0])
+	    .map(name => name[0])
 		.join('');
 	});
 };
 
 createUsernames(accounts)
+
+
+// Event Handlers
+// Event Handlers
+
+// Account variables
+let currentAccount;
+
+btnLogin.addEventListener('click', function (event) {
+    event.preventDefault(); // prevent reload of page
+
+    currentAccount = accounts.find(
+    acct => acct.username === inputLoginUsername.value
+    );
+    console.log(currentAccount)
+
+    if(currentAccount?.pin === Number(inputLoginPin.value)) {
+            console.log('LOGIN')
+        }
+
+    //Display UI and Mesg
+
+    labelWelcome.textContent = `Welcome back ${currentAccount.owner.split(' ')[0]}`
+    containerApp.style.opacity = 100;
+
+    //Display Movements
+    //Display Balance
+    //Display Summary
+
+    })
+
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -105,7 +169,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
 //
 // Adding up all the values of an array
 const balance = movements.reduce((acc,cur) => acc + cur,0);
-console.log(balance)
+//console.log(balance)
 
 
 // other stuff with the reduce method
@@ -113,12 +177,12 @@ console.log(balance)
 const max = movements.reduce((acc,mov) => acc > mov ? acc : mov,movements[0]); 
 //{
 //if (acc > mov)
-//	return acc;
+//  return acc;
 //else 
 //	return mov
 //},movements[0])
 
-console.log(max)
+//console.log(max)
 
 
 
@@ -130,7 +194,7 @@ console.log(max)
 const deposits = movements.filter(mov => mov > 0);
 const withdrals = movements.filter(mov => mov < 0);
 console.log(deposits)
-console.log(withdrals)
+//console.log(withdrals)
 
 // Using the map Method
 
@@ -138,7 +202,7 @@ const movementsDescription = movements.map(
 	(mov, i) => 
 	`Movement ${i + 1}: You ${mov > 0 ? 'deposited':'withdrew'} ${Math.abs(mov)}`
 );
-console.log(movementsDescription)
+//console.log(movementsDescription)
 
 
 
