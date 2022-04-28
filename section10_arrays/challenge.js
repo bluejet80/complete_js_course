@@ -38,3 +38,4 @@ const checkDogs = function(array1,array2){
 checkDogs(dogsJuliaCorrect,dogsKate)
 console.log('------------ Second Dataset -------------')
 checkDogs(dogsJulia2Correct,dogsKate2)
+

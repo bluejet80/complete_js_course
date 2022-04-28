@@ -75,40 +75,51 @@ const type = mov > 0 ? 'deposit' : 'withdrawal'
 	containerMovements.insertAdjacentHTML('afterbegin',html);
 	})
 }
-displayMovements(account1.movements)
 
 // Displaying the balance
 // Displaying the balance
-const calcDisplayBalance = function(movements) {
-     const balance = movements.reduce((acc,mov) => acc + mov,0);
-	labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function(acct) {
+     acct.balance = acct.movements.reduce((acc,mov) => acc + mov,0);
+    labelBalance.textContent = `${acct.balance}€`;
 }
-calcDisplayBalance(account1.movements)
+
+//Update the UI
+const updateUI = function(acct) {
+
+    //Display Movements
+    displayMovements(acct.movements)
+
+    //Display Balance
+    calcDisplayBalance(acct)
+
+    //Display Summary
+    calcDisplaySummary(acct)
+
+    }
 
 
 // Diplaying the Summary
 // Diplaying the Summary
-const calcDisplaySummary = function(movements) {
-    const incomes = movements
+const calcDisplaySummary = function(acct) {
+    const incomes = acct.movements
         .filter(mov => mov > 0)
         .reduce((acc, mov) => acc + mov,0)
     labelSumIn.textContent = `${incomes}€`
 
-    const out = movements
+    const out = acct.movements
         .filter(mov => mov < 0)
         .reduce((acc, mov) => acc + mov,0)
     labelSumOut.textContent = `${Math.abs(out)}€`
 
-    const interest = movements
+    const interest = acct.movements
         .filter(mov => mov > 0)
-        .map(dep => dep * 1.2/100)
+        .map(dep => dep * acct.interestRate/100)
         .filter(a => a >= 1)
-        .reduce((acc, mov) => acc + mov,0)
+        .reduce((acc, mov) => acc + mov,0).toFixed(2)
     labelSumInterest.textContent = `${interest}€`
     }
 
 
-calcDisplaySummary(account1.movements)
 
 
 
@@ -133,6 +144,8 @@ createUsernames(accounts)
 // Account variables
 let currentAccount;
 
+
+//login button
 btnLogin.addEventListener('click', function (event) {
     event.preventDefault(); // prevent reload of page
 
@@ -142,20 +155,79 @@ btnLogin.addEventListener('click', function (event) {
     console.log(currentAccount)
 
     if(currentAccount?.pin === Number(inputLoginPin.value)) {
-            console.log('LOGIN')
-        }
 
     //Display UI and Mesg
 
     labelWelcome.textContent = `Welcome back ${currentAccount.owner.split(' ')[0]}`
     containerApp.style.opacity = 100;
 
-    //Display Movements
-    //Display Balance
-    //Display Summary
+    updateUI(currentAccount)
+    }
+    //clear the input fields
+    //
+    inputLoginUsername.value = inputLoginPin.value = ''
 
+    //lose focus
+    //
+    inputLoginPin.blur()
+})
+
+//transfer button
+
+btnTransfer.addEventListener('click', function(event) {
+    event.preventDefault()
+    const amount = Number(inputTransferAmount.value)
+    const recieverAcct = accounts.find(acc => acc.username === inputTransferTo.value)
+    
+    inputTransferAmount.value = inputTransferTo.value = ''
+
+    //Prelem Checks
+    
+    //amount needs to be positive
+    //balance of current user needs to be greater than amount
+    //
+    if (amount > 0 &&
+        recieverAcct &&
+        currentAccount.balance >= amount &&
+        recieverAcct.username !== currentAccount.username)
+    {
+        //completing the transfer
+        currentAccount.movements.push(-amount)
+        recieverAcct.movements.push(amount)
+        updateUI(currentAccount)
+
+        }
     })
 
+//Loan button
+
+// Our bank has a rule which says it only grants a loan if there is at least
+// one deposit with at least 10% of the requested loan amount.
+//
+btnLoan.addEventListener('click', function(event) {
+    event.preventDefault()
+
+    const amount = Number(inputLoanAmount.value)
+    if(amount > 0 && currentAccount.movements.some(a => a >= amount * 0.1)){
+        currentAccount.movements.push(amount)
+        updateUI(currentAccount)
+        }
+    inputLoanAmount.value = ''
+    })
+
+
+//close account button
+
+btnClose.addEventListener('click', function(event) {
+    event.preventDefault()
+
+    if(inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin){
+        const index = accounts.findIndex(acct => acct.username === currentAccount.username)
+        accounts.splice(index,1)
+        containerApp.style.opacity = 0;
+        }
+    inputCloseUsername.value = inputClosePin.value= ''
+    })
 
 
 
@@ -163,7 +235,57 @@ btnLogin.addEventListener('click', function (event) {
 /////////////////////////////////////////////////
 // LECTURES
 
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+/// Flat and FlatMap Methods
+
+const elephant = [[1,2,3], [4,5,6],[7,8,9]]
+console.log(elephant.flat())
+
+// the flat method will flatten an array
+// you can pass a depth argument to tell it how deep to flatten the array
+
+// Lets say we wanted the balance of all the movements of all the accounts
+
+// put all the movments into one array with the map method
+
+const acctMovements = accounts.map(acc => acc.movements)
+console.log(acctMovements)
+
+// Now we just flatten it and then reduce it
+
+const totalBalance = acctMovements.flat().reduce((acc,cur) => acc + cur, 0)
+console.log(totalBalance)
+
+//Flat Map Method is just a combination of map and flat methods
+
+
+
+
+/// Some and Every Methods
+
+//console.log(movements)
+//console.log(movements.includes(-130));
+
+// the includes method tests for equality but what if we wanted to test
+// for something else?
+//
+// With the some method we can test for some condition
+
+const anyDeposits = movements.some(a => a > 0)
+//console.log(anyDeposits)
+
+
+// Every Method
+// Every only returns true if all the elements in the array pass the condition
+
+// External Call back
+
+const pigeon = a => a < 0
+//console.log(movements.some(pigeon))
+//console.log(movements.filter(pigeon))
+
 
 // Using the Reduce Method
 //
@@ -193,7 +315,7 @@ const max = movements.reduce((acc,mov) => acc > mov ? acc : mov,movements[0]);
  // create an array of deposits
 const deposits = movements.filter(mov => mov > 0);
 const withdrals = movements.filter(mov => mov < 0);
-console.log(deposits)
+//console.log(deposits)
 //console.log(withdrals)
 
 // Using the map Method

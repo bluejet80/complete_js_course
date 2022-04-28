@@ -1,0 +1,214 @@
+4-22-22
+Review of course so far
+
+
+
+.1h Dom Elements
+
+Its always good to create a variable for your DOM Element selectors.
+This way you dont have to write document.querySelector('class name')
+all the time. Now you can just type the variable that corresponds to 
+the DOM Element. 
+
+.1h Array Methods
+
+.2h Simple Array Methods
+
+.3h 1. The slice Method
+
+With this method we can take a slice of any array without altering the
+original array.
+
+Slice Method Syntax:  arr.slice(begin,end)
+
+The slice method always returns a new array.
+
+And just like in strings, the end parameter is not included in what is
+returned. 
+
+You can also specify a negative number for the begin and then it will 
+start returning values from the end of the array.
+
+With this we can easily get the last element of the array by typing:
+arr.slice(-1)
+
+And with this method we can also create a shallow copy of the array by 
+typing:
+
+arr.slice()
+
+.3h The Splice Method
+
+The splice method works very similar to the slice method, except it 
+does alter the original array.
+
+What the splice method does it return what you would expect, just like 
+the slice method, but then whatever values were returned were then also
+removed from the array.
+
+Most often we are not concerned about the elements returned when we use 
+splice, most often we are only concerned about removing certain elements
+from the array.
+
+To easily remove the last element of an Array we can type:
+arr.splice(-1)
+
+And if we wish to delete values in the middle of the array we merely 
+specify the begin and end as we did with the slice method.
+
+.3h The Reverse Method
+
+The syntax is firly simple and this method does mutate the original array.
+
+arr.reverse()
+
+.3h The Concat Method
+
+This method joins two arrays together. 
+
+arr.concat(arr2)
+
+This same thing can also be done using the spread operator.
+
+const newArray = [...arr, ...arr2]
+
+Neither this method nor the concat method mutates the original arrays.
+
+
+.3h The Join Method
+
+The join method turns an array into a string and you can specify a 
+separator if you like. 
+
+newArray.join('-')
+
+
+.3h The Push Method
+
+the push method adds a value to the end of the array
+
+.3h The Unshift Method
+
+the unshift method adds the value to the beginning of the array
+
+.3h The Pop Method
+
+this method removes the last value of the array and returns that value
+as well.
+
+.3h The Shift Method
+
+this method removes the first value of the array and returns that value
+as well.
+
+.3h The indexOf Method
+
+this method of course gives you the index of the number or string that
+you pass into it.
+
+if the value passsed in does not exist then -1 is returned.
+
+.3h The includes Method
+
+This method returns true or false depending on whether the specified
+value is in the array or not. 
+
+.3h The At Method
+
+This method allows you to get a value from an array in a much easier way
+then typing the traditional bracket notation.
+
+The best aspect of this method is that it allows us to chain other methods
+to it and also we are able to get the last value of an arrray by just 
+typing:
+
+arr.at(-1)
+
+and with this method you get the actual value and not just an array element. 
+
+
+.2h Complex Array Methods
+
+Each one of these Array methods takes a callback function as one of its
+parameters. 
+
+.3h The ForEach Method
+
+This method is similar to the for_of loop except that it requires less code
+and you get access to the index of the array and the array itself.
+
+arr.forEach(function(item, index, array) {
+    console.log(`Here is the ${item} and the ${index} and the 
+    original array, ${array}`)
+    }
+
+You can gain access to the indexes of an array by using the arr.entries
+method. If you were to destructure this then, unlike the forEach method,
+the first element is the index and the second element is the current value
+in the array. 
+
+.3h The Map Method
+
+The map method is very similar to the forEach method but the values are
+returned in the forEach method but no values are returned in the map method
+however the original array is modified by the callback function passed to 
+the Map method.
+
+.3h The Filter Method
+
+.3h The Reduce Method
+
+.3h The Find Method
+
+.3h The Find Index Method
+
+.1h Add Elements to an array of objects
+
+Here is an array of objects
+
+conse begel = [
+    { fifName: 'Babajo',
+      weekday: 'Tuesday',
+      noOfKids: 8,
+      favColor: 'white',
+      number: 232894302
+      },{
+      fifName: 'Saidshe',
+      weekday: 'Thursday',
+      noOfKids: 14,
+      favColor: 'blue',
+      number: 119203029
+    }]
+
+Now if we want to add an element to both of those objects we
+use the MAP array method
+
+begel.map(obj => obj.onVacation = false)
+
+This will add the element onVacation with the value 'false' to both objects.
+
+.1h Destructuring Arrays of Objects
+
+We can also destructure array of objects in a couple of different ways.
+
+First is what I call normal destructuring where we assign variables to
+different elements of each object by creating another array.
+
+const [cars,planes] = [begel[0].favColor,begel[1].favColor]
+
+In this case the variables would now be:
+cars = 'white'
+planes = 'blue'
+
+Another way that we can destructure this array of objects is in this
+method. 
+
+const [ {weekday: day1, favColor: cars}, {weekday: day2} ] = begel
+
+Here now we have set the variables day1 and day2 to their coressponding
+values in each object. 
+
+
+
+
+
