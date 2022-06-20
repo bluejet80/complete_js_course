@@ -127,10 +127,9 @@ const createFoodArrays = function (data) {
       ownersEatTooMuch.push(item.owners);
     }
   });
-  ownersEatTooLittle.flat();
-  ownersEatTooMuch.flat();
-  console.log(ownersEatTooMuch);
-  console.log(ownersEatTooLittle);
+  const tooMuch = ownersEatTooMuch.flat();
+  const tooLittle = ownersEatTooLittle.flat();
+  console.log(`${tooMuch.join(', and ')}'s dogs eat too much`);
 };
 
 createFoodArrays(dogs);
