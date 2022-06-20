@@ -94,8 +94,43 @@ const dogs = [
 ];
 //GOOD LUCK 😀
 
-const updateObj = dogs.forEach(item => {
-  item.recommendedFood = (item.weight ** 0.75 * 28).toFixed(2);
+// change the objects of the array
+dogs.forEach(item => {
+  item.recommendedFood = Number((item.weight ** 0.75 * 28).toFixed(2));
 });
 
+// find owner and log if they over feeding
+const findOwner = function (owner) {
+  const array = [];
+  dogs.forEach(item => {
+    if (item.owners.includes(owner)) array.push(item);
+  });
+  if (array[0].curFood < array[0].recommendedFood) {
+    console.log(`${owner}'s dog is eating too little.`);
+  } else {
+    console.log(`${owner}'s dog is eating too much`);
+  }
+};
+
 console.log(dogs);
+
+findOwner('Alice');
+
+// create an array of each owners feeding habits
+const createFoodArrays = function (data) {
+  const ownersEatTooMuch = [];
+  const ownersEatTooLittle = [];
+  data.forEach(item => {
+    if (item.curFood < item.recommendedFood) {
+      ownersEatTooLittle.push(item.owners);
+    } else {
+      ownersEatTooMuch.push(item.owners);
+    }
+  });
+  ownersEatTooLittle.flat();
+  ownersEatTooMuch.flat();
+  console.log(ownersEatTooMuch);
+  console.log(ownersEatTooLittle);
+};
+
+createFoodArrays(dogs);
