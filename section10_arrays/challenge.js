@@ -169,3 +169,24 @@ const okOwners = () => {
 okOwners();
 
 // Objective 8: Create a copy and sort by recommended food portion in ascending order
+
+const dogsNew = dogs.slice();
+
+//sorting the objects of an array.
+// The array sort function works off of a function returning either 1 or -1
+// so you can create your own sort function that returns either 1 or -1 depending
+// on what item is to be sorted what way
+
+const sortObj = (a, b) => {
+  if (a.recommendedFood < b.recommendedFood) {
+    return -1;
+  } else if (a.recommendedFood > b.recommendedFood) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
+dogsNew.sort(sortObj);
+
+console.log(dogsNew);
