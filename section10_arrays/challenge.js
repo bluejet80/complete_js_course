@@ -94,12 +94,12 @@ const dogs = [
 ];
 //GOOD LUCK 😀
 
-// change the objects of the array
+// Objective 1: change the objects of the array
 dogs.forEach(item => {
   item.recommendedFood = Number((item.weight ** 0.75 * 28).toFixed(2));
 });
 
-// find owner and log if they over feeding
+// Objective 2: find owner and log if they over feeding
 const findOwner = function (owner) {
   const array = [];
   dogs.forEach(item => {
@@ -116,7 +116,8 @@ console.log(dogs);
 
 findOwner('Alice');
 
-// create an array of each owners feeding habits
+// Objective 3 adn 4: Create an array of each owners feeding habits
+// Print to console
 const createFoodArrays = function (data) {
   const ownersEatTooMuch = [];
   const ownersEatTooLittle = [];
@@ -130,6 +131,41 @@ const createFoodArrays = function (data) {
   const tooMuch = ownersEatTooMuch.flat();
   const tooLittle = ownersEatTooLittle.flat();
   console.log(`${tooMuch.join(', and ')}'s dogs eat too much`);
+  console.log(`${tooLittle.join(', and ')}'s dogs eat too little`);
 };
 
 createFoodArrays(dogs);
+
+// Object 5: Check if a Owner is feeding their dog right.
+
+const testOne = () => dogs.some(item => item.curFood === item.recommendedFood);
+
+console.log(testOne());
+
+// Objective 6 and 7: Dogs eating ok amount
+
+const checkOK = one =>
+  one.curFood > one.recommendedFood * 0.9 &&
+  one.curFood < one.recommendedFood * 1.1;
+
+const anyDogOk = () => dogs.some(item => checkOK(item));
+
+console.log(anyDogOk());
+
+const okOwners = () => {
+  const yesOwners = [];
+  const noOwners = [];
+  dogs.forEach(item => {
+    if (checkOK(item)) {
+      yesOwners.push(item.owners);
+    } else {
+      noOwners.push(item.owners);
+    }
+  });
+  console.log(`${yesOwners.flat().join(', ')}'s dog is fed ok.`);
+  console.log(`${noOwners.flat().join(', ')}'s dogs are not fed ok.`);
+};
+
+okOwners();
+
+// Objective 8: Create a copy and sort by recommended food portion in ascending order
