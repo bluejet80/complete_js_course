@@ -90,4 +90,7 @@ const hatTrick = blimp.filter(a => a % 2 == 0).map(b => b * 10);
 
 console.log(hatTrick);
 
+// print values in an array
+console.log(blimp.join(','))
+
 
