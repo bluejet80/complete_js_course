@@ -116,6 +116,13 @@ console.log(dogs);
 
 findOwner('Alice');
 
+// another way to do this
+// do a find and then an includes
+
+const dogSarah = dogs.find(item => item.owners.includes('Sarah'));
+
+console.log(dogSarah);
+
 // Objective 3 adn 4: Create an array of each owners feeding habits
 // Print to console
 const createFoodArrays = function (data) {
@@ -135,6 +142,14 @@ const createFoodArrays = function (data) {
 };
 
 createFoodArrays(dogs);
+
+// Another way to do this
+// filter to get the ones you want then flat map to get your array.
+const eatMuch = dogs
+  .filter(item => item.curFood > item.recommendedFood)
+  .flatMap(item => item.owners);
+
+console.log(eatMuch);
 
 // Object 5: Check if a Owner is feeding their dog right.
 
@@ -190,3 +205,12 @@ const sortObj = (a, b) => {
 dogsNew.sort(sortObj);
 
 console.log(dogsNew);
+
+// Another way to do this
+// when sorting an array of objects the a and b become the objects
+
+const dogsNew2 = dogs
+  .slice()
+  .sort((a, b) => a.recommendedFood - b.recommendedFood);
+
+console.log(dogsNew2);
