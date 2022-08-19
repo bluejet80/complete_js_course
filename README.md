@@ -6,14 +6,10 @@ This course is focused on Java Script which I think is a good starting point
 for an indepth programming study. So many things are tied to javascript. 
 
 ## Current Progress
-So far I am working on the first section. 
+Currently I am on the 14th Section. 
+This section is about Object Oriented Programming in Javascript
 
-There are 20 some sections to complete. My goal is to have the course done by the end of January. 
-You also get a Certificate upon completion. And all the work I do will be up on github and available
-to prospective employers. 
-
-This course starts off very simple so many things I already know but I still want to go over them just to 
-review. 
+So far I have learned about Classes and Constructor functions and prototypes and prototype inheritance and creating instances of classes.
 
 ## Link to course
 [Link to all Udemy Courses](https://www.udemy.com/home/my-courses/learning/)
