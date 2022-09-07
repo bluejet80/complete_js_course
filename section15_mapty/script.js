@@ -13,10 +13,29 @@ const inputElevation = document.querySelector(".form__input--elevation");
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
-    function (position) {
-      console.log(position);
+    (position) => {
+      const { latitude } = position.coords;
+      const { longitude } = position.coords;
+      console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+
+      const coords = [latitude, longitude];
+
+      const map = L.map("map").setView(coords, 12);
+
+      L.tileLayer(
+        "https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg",
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }
+      ).addTo(map);
+
+      L.marker(coords)
+        .addTo(map)
+        .bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
+        .openPopup();
     },
-    function () {
+    () => {
       alert("Could not get your location");
     }
   );
